@@ -1,0 +1,14 @@
+# Target build folders
+/target/
+/test-output/
+/Reports/
+/logs/
+*.log
+
+# IDE Specific Files
+.settings/
+.project
+.classpath
+.factorypath
+*.iml
+.idea/
