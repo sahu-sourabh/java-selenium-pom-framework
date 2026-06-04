@@ -1,4 +1,4 @@
-package com.inetbanking.models;
+package com.saucedemo.models;
 
 public class UserCredentials {
     
