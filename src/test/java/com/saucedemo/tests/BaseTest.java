@@ -19,8 +19,8 @@ public class BaseTest {
     protected String baseURL = readConfig.getURL();
     protected String username = readConfig.getUsername();
     protected String password = readConfig.getPassword();
-    
-    protected WebDriver driver; 
+
+    protected WebDriver driver;
     protected static final Logger logger = LogManager.getLogger(BaseTest.class);
 
     @Parameters("browser")
@@ -30,13 +30,13 @@ public class BaseTest {
 
         driver = switch (br.toLowerCase().trim()) {
             case "chrome" -> new ChromeDriver(); // Native Selenium Manager automatically configures this binary!
-            case "edge"   -> new EdgeDriver();
+            case "edge" -> new EdgeDriver();
             default -> throw new IllegalArgumentException("Bailing out! Unsupported browser parameter: " + br);
         };
 
         driver.manage().deleteAllCookies();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        
+
         driver.get(baseURL);
         driver.manage().window().maximize();
         logger.info("Successfully navigated to base URL: {}", baseURL);
@@ -48,5 +48,10 @@ public class BaseTest {
             driver.quit();
             logger.info("Automation browser session closed smoothly.");
         }
+    }
+
+    // So external listeners can safely request the active thread's driver instance
+    public WebDriver getDriver() {
+        return this.driver;
     }
 }
