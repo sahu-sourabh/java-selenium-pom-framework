@@ -1,5 +1,7 @@
 # Selenium Java POM MVP (`selenium-java-pom-mvp`)
 
+[![Automation Regression Pipeline](https://github.com/sahu-sourabh/selenium-java-pom-mvp/actions/workflows/maven.yml/badge.svg)](https://github.com/sahu-sourabh/selenium-java-pom-mvp/actions/workflows/maven.yml)
+
 A high-performance, enterprise-ready web automation showcase engineered with Java 25, Selenium 4, and TestNG. This repository demonstrates a thread-safe, decoupled Page Object Model (POM) architecture optimized for continuous integration environments.
 
 ---

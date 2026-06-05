@@ -38,7 +38,8 @@ public class BaseTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         driver.get(baseURL);
-        driver.manage().window().maximize();
+        // FIX: Workaround for Chrome/Linux CI display bugs where maximize() crashes headless pipelines
+        driver.manage().window().setSize(new org.openqa.selenium.Dimension(1920, 1080));
         logger.info("Successfully navigated to base URL: {}", baseURL);
     }
 
