@@ -1,38 +1,64 @@
-# Modern Web Automation Framework (MVP)
+# Selenium Java POM MVP (`selenium-java-pom-mvp`)
 
-A lightweight, high-performance web automation framework designed using the **Page Object Model (POM)** pattern. Engineered from the ground up using modern software practices, this project showcases a clean, decoupled test architecture built for scalability and thread safety.
+A high-performance, enterprise-ready web automation showcase engineered with Java 25, Selenium 4, and TestNG. This repository demonstrates a thread-safe, decoupled Page Object Model (POM) architecture optimized for continuous integration environments.
 
-## 🚀 Tech Stack & Specifications
-* **Language:** Java 25 (utilizing modern pattern matching and switch expressions)
-* **Automation Engine:** Selenium 4+ (featuring native Selenium Manager execution)
-* **Test Orchestration:** TestNG 7.12.0
-* **Build Tool:** Apache Maven
-* **Logging System:** Log4j2 (API & Core synchronization)
+---
 
-## 🏛️ Framework Architecture Key Features
-* **Zero Driver Setup Overhead:** Completely decoupled from legacy WebDriverManager binaries; leverages Selenium 4's native background driver manager.
-* **Thread-Safe Architecture:** Drivers are instance-scoped within test classes to allow concurrent cross-browser execution without resource collision.
-* **Robust Configuration Parsing:** Uses the Java ClassLoader to read environment properties dynamically from the classpath, avoiding brittle relative system directory paths.
-* **Lean Execution Footprint:** Stripped of unnecessary boilerplate build plugins to maximize execution speed and simplify dependency tracking.
+## 🛠️ Core Engineering Highlights
 
-## 📁 Directory Structure
+* **Thread-Safe Architecture:** Eliminated brittle listener-to-base inheritance anti-patterns by utilizing TestNG execution context reflection to handle runtime browser sessions safely.
+* **Encapsulated Page Objects:** Strict object-oriented design patterns where locator attributes are isolated as private class-level constants, enforcing complete webpage decoupling.
+* **Self-Cleaning Lifecycles:** Configured runtime logs, HTML regression reports, and failure screenshots to route entirely into Maven's transient `target/` directory, automating local workspace cleanup during execution loops.
+* **Headless CI/CD Pipeline:** Fully automated GitHub Actions workflow integrated with virtual framebuffers (`xvfb`), executing test runners seamlessly on remote cloud instances while persisting historical run metrics via pipeline artifacts.
+
+---
+
+## 💻 Tech Stack Matrix
+
+| Layer | Technology | Purpose |
+| :--- | :--- | :--- |
+| **Language** | Java 25 | Utilizes modern language structures (Switch Expressions) |
+| **Core Engine** | Selenium 4 | Native driver binary handling via Selenium Manager |
+| **Test Runner** | TestNG | Advanced test lifecycle controls and execution routing |
+| **Logging** | Log4j2 + SLF4J Bridge | Uniform tracing across both local frameworks and internal engine drivers |
+| **Reporting** | Extent Reports | Responsive HTML reporting output maps with relative visual capture links |
+| **CI/CD Pipeline** | GitHub Actions | Remote test orchestration on headless Ubuntu containers |
+
+---
+
+## 📂 Project Architecture
+
 ```text
+├── .github
+│   └── workflows
+│       └── maven.yml          # GitHub Actions CI pipeline configuration
 ├── src
 │   └── test
 │       ├── java
 │       │   └── com.saucedemo
-│       │       ├── pages       # Page Object classes (Encapsulated elements/actions)
-│       │       ├── tests       # Test execution layers (BaseTest & Test cases)
-│       │       └── utils       # Configuration loaders and Listeners
-│       └── resources           # Global environment properties & configurations
-├── testng.xml                  # Test suite configuration definitions
-└── pom.xml                     # Maven dependencies configuration file
+│       │       ├── pages      # Page Object wrappers (UI action layers)
+│       │       ├── tests      # Test execution suits and BaseTest hooks
+│       │       └── utils      # Centralized reporting configurations and listeners
+│       └── resources
+│           ├── config.properties  # Global environment settings
+│           └── log4j2.xml         # Unified logging engine configurations
+└── pom.xml                    # Consolidated dependencies and build lifecycle manager
 ```
 
-## ⚙️ How to Run the Suite
-**Prerequisites**
-Ensure you have **Java 25** and **Maven** installed and configured in your environment path variable.
+---
 
-**Execute via CLI**
-Open your terminal at the root directory of the project and execute:
+## 🚀 Local Execution Setup
+**Prerequisites**
+Ensure you have the following installed locally:
+- Java JDK 25
+- Apache Maven
+
+**Running the Tests**
+To wipe out stale runtime components and execute the regression suite natively, open your terminal at the root directory and trigger:
 - mvn clean test
+
+**Viewing Execution Outputs**
+- **Logs:** Available at ./target/logs/execution.log
+- **HTML Reports:** Interactive test results are automatically rendered at ./target/reports/index.html
+
+---
