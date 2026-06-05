@@ -4,12 +4,18 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class LoginPage {
-    
+
     private final WebDriver driver;
 
-    private final By usernameField = By.id("user-name");
-    private final By passwordField = By.id("password");
-    private final By loginButton   = By.id("login-button");
+    // Element attributes are encapsulated right here as private constants
+    private static final String USERNAME_ID = "user-name";
+    private static final String PASSWORD_ID = "password";
+    private static final String LOGIN_BTN_ID = "login-button";
+
+    // Clean, readable locator assignments
+    private final By usernameField = By.id(USERNAME_ID);
+    private final By passwordField = By.id(PASSWORD_ID);
+    private final By loginButton = By.id(LOGIN_BTN_ID);
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;

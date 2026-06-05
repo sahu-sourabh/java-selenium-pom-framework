@@ -1,0 +1,39 @@
+name: Automation Regression Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Pull the code from your repository into the runner environment
+    - name: Checkout Code Base
+      uses: actions/checkout@v4
+
+    # 2. Provision Java 25 natively on the cloud instance
+    - name: Set Up JDK 25
+      uses: actions/setup-java@v4
+      with:
+        java-version: '25'
+        distribution: 'temurin'
+        cache: maven
+
+    # 3. Execute tests inside a Virtual Display Buffer (Xvfb) to prevent GUI crashes
+    - name: Execute Automated Test Suite
+      run: xvfb-run --auto-servernum mvn clean test
+
+    # 4. Extract and preserve the execution reports so you can view them on GitHub
+    - name: Upload Extent Execution Reports
+      if: always() # Guarantees reports are saved even if tests fail
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-execution-artifacts
+        path: |
+          target/reports/
+          target/logs/
+        retention-days: 7
